@@ -44,6 +44,10 @@ export class ApiService {
         return Object.keys(filters).every((filterField) => {
           const filterValue = filters[filterField];
 
+          if (filterField === 'data') {
+            return JSON.stringify(item).toLocaleLowerCase().includes((filterValue as string).toLowerCase());
+          }
+
           if (filterField === 'tags') {
             return (filterValue as string[]).some((tag) => item.tags.includes(tag));
           }
